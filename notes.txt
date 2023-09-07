@@ -1,0 +1,27 @@
+
+// $match
+// >> It is used to filter document(condition as like in find)
+// $project
+// >> It will select some specific fields from a collection
+// $group
+// >> It is used to group documents on based on some values
+// $sort
+// >> It is used to sort data
+// $skip
+// >>Skip number of documents
+// $limit
+// >> to retrieve numb of documents
+// $unwind
+// >> deconstruct an Array, like flat the Array
+// $out
+// >> is to write the document output
+
+// Accumulators
+// ----------------
+sum;
+count;
+avg;
+min;
+max;
+first;
+last;
