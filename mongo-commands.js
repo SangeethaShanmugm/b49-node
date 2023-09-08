@@ -112,5 +112,58 @@ db.orders.aggregate([{ $match: { status: "urgent" } }, { $group: { _id: "$produc
 
 // Task
 // 1. Update the quantity for all document -> by default -100
+
+db.orders.updateMany({}, { $set: { quantity: 100 } })
+
 // 2. Update rating for the "name" = "U.S. POLO ASSN. Men T-Shirt" from rating 7 to 6.5
+
+db.products.updateOne({ name: "U.S. POLO ASSN. Men T-Shirt" }, { $set: { rating: 6.5 } })
+
 // 3. Delete all products  with rating > 8.5
+
+db.products.deleteMany({ rating: { $gt: 8.5 } })
+
+
+// Cursor
+
+var mycursor = db.orders.find({ _id: 5 }).pretty()
+mycursor
+
+// next()
+
+var mycursor = db.orders.find({ _id: { $gt: 3 } }).pretty()
+while (mycursor.hasNext()) {
+    print(tojson(mycursor.next()))
+}
+
+// forEach()
+
+var mycursor = db.orders.find({ _id: 5 }).pretty()
+mycursor.forEach(printjson)
+
+
+var mycursor = db.orders.find().forEach(function (myData) {
+    print("orders => " + myData.productName)
+})
+
+var mycursor = db.products.find().forEach(function (myData) {
+    print("products => " + myData.name + " " + myData.price)
+})
+
+//count
+
+db.orders.find().count()
+
+//toArray
+
+db.orders.find().toArray()
+
+//map
+
+var listproductName = db.orders.find().map(function (data) {
+    return data.productName
+})
+
+var listproductName = db.orders.find().map(function (data) { return data.quantity * 100 })
+
+
