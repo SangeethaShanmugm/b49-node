@@ -28,5 +28,18 @@ async function genPassword(password) {
 }
 // console.log(genPassword("password@123"));
 
+async function createUser(username, hashedPassword) {
+    return await client.db("b49-wd").collection("users").insertOne({ username: username, password: hashedPassword })
+}
 
-export { getAllProducts, getProductById, deleteProductById, addProducts, updateProducts, genPassword }
+async function getUserByName(username) {
+    return await client.db("b49-wd").collection("users").findOne({ username: username })
+}
+
+
+async function getAllUser() {
+    return await client.db("b49-wd").collection("users").find().toArray()
+}
+
+
+export { getAllProducts, getProductById, deleteProductById, addProducts, updateProducts, genPassword, createUser, getUserByName, getAllUser }
