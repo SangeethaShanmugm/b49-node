@@ -1,6 +1,7 @@
 
 import express from "express"
 import { MongoClient } from "mongodb"
+import cors from "cors"
 import 'dotenv/config'
 import { productsRouter } from "./routes/products.js"
 import { usersRouter } from "./routes/users.js"
@@ -9,7 +10,7 @@ const PORT = 9000
 
 //Interceptor => converting body to json
 app.use(express.json()) //Inbuilt middleware => to say data is in JSON
-
+app.use(cors())
 
 //Mongodb connection
 
